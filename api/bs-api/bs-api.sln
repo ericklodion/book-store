@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bs-api", "bs-api\bs-api.csproj", "{7AD97D46-FEF1-469B-BD31-D2ACB2C8581B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bs-domain", "bs-domain\bs-domain.csproj", "{BE10C1F0-2EA1-41B8-ABA3-6C02257350B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bs-service", "bs-service\bs-service.csproj", "{19C5D2C5-E03F-4299-BEF2-36EB99DE38AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AD97D46-FEF1-469B-BD31-D2ACB2C8581B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AD97D46-FEF1-469B-BD31-D2ACB2C8581B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AD97D46-FEF1-469B-BD31-D2ACB2C8581B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AD97D46-FEF1-469B-BD31-D2ACB2C8581B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE10C1F0-2EA1-41B8-ABA3-6C02257350B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE10C1F0-2EA1-41B8-ABA3-6C02257350B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE10C1F0-2EA1-41B8-ABA3-6C02257350B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE10C1F0-2EA1-41B8-ABA3-6C02257350B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19C5D2C5-E03F-4299-BEF2-36EB99DE38AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C5D2C5-E03F-4299-BEF2-36EB99DE38AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C5D2C5-E03F-4299-BEF2-36EB99DE38AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C5D2C5-E03F-4299-BEF2-36EB99DE38AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1890D5F-D1E6-46FC-8DEC-2EA49256CE44}
+	EndGlobalSection
+EndGlobal
