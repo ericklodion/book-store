@@ -10,7 +10,6 @@ namespace bs_domain
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext() { }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Book> Book { get; set; }
@@ -20,11 +19,6 @@ namespace bs_domain
         public DbSet<BookSubject> BookSubject { get; set; }
         public DbSet<BookPriceTable> BookPriceTable { get; set; }
         public DbSet<BookAuthor> BookAuthor { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("");
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

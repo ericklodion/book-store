@@ -33,7 +33,7 @@ namespace bs_api.Controllers
         }
 
         [HttpDelete("{code}")]
-        public async Task<IActionResult> Delete([FromQuery] long code)
+        public async Task<IActionResult> Delete([FromRoute] long code)
         {
             await _service.Delete(code);
             return Ok();

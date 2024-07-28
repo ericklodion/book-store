@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace bs_service.DTO
 {
-    public class SubjectDTO
+    public class PriceTableDTO
     {
         public long? Code { get; set; } = null;
         public string Description { get; set; }

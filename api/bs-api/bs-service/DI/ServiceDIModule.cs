@@ -18,6 +18,8 @@ namespace bs_domain.DI
 
             services.AddScoped<BookService>();
             services.AddScoped<SubjectService>();
+            services.AddScoped<AuthorService>();
+            services.AddScoped<PriceTableService>();
 
             return services;
         }

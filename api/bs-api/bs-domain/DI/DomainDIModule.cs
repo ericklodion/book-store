@@ -19,6 +19,8 @@ namespace bs_domain.DI
 
             services.AddScoped<BookReporitory>();
             services.AddScoped<SubjectReporitory>();
+            services.AddScoped<AuthorReporitory>();
+            services.AddScoped<PriceTableReporitory>();
 
             return services;
         }

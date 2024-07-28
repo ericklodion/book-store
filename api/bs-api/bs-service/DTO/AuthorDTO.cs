@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace bs_service.DTO
 {
-    public class SubjectDTO
+    public class AuthorDTO
     {
         public long? Code { get; set; } = null;
-        public string Description { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -7,11 +7,11 @@ namespace bs_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectController : ControllerBase
+    public class PriceTableController : ControllerBase
     {
-        public readonly SubjectService _service;
+        public readonly PriceTableService _service;
 
-        public SubjectController(SubjectService service)
+        public PriceTableController(PriceTableService service)
         {
             _service = service;
         }
@@ -23,13 +23,13 @@ namespace bs_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] SubjectDTO dto)
+        public async Task<IActionResult> Post([FromBody] PriceTableDTO dto)
         {
             return Ok(await _service.Create(dto));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] SubjectDTO dto)
+        public async Task<IActionResult> Put([FromBody] PriceTableDTO dto)
         {
             return Ok(await _service.Update(dto));
         }

@@ -7,11 +7,11 @@ namespace bs_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectController : ControllerBase
+    public class AuthorController : ControllerBase
     {
-        public readonly SubjectService _service;
+        public readonly AuthorService _service;
 
-        public SubjectController(SubjectService service)
+        public AuthorController(AuthorService service)
         {
             _service = service;
         }
@@ -23,13 +23,13 @@ namespace bs_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] SubjectDTO dto)
+        public async Task<IActionResult> Post([FromBody] AuthorDTO dto)
         {
             return Ok(await _service.Create(dto));
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] SubjectDTO dto)
+        public async Task<IActionResult> Put([FromBody] AuthorDTO dto)
         {
             return Ok(await _service.Update(dto));
         }

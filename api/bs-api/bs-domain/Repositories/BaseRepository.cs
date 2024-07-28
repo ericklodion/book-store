@@ -29,18 +29,23 @@ namespace bs_domain.Repositories
         public async Task<T> Create(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+            _context.SaveChanges();
+
             return entity;
         }
 
         public async Task<T> Update(T entity)
         {
             _context.Set<T>().Update(entity);
+            _context.SaveChanges();
+
             return entity;
         }
 
         public async Task Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
+            _context.SaveChanges();
         }
     }
 }

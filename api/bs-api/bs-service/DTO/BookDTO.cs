@@ -9,7 +9,7 @@ namespace bs_service.DTO
 {
     public class BookDTO
     {
-        public long? Code { get; set; }
+        public long? Code { get; set; } = null;
         public string Title { get; set; }
         public string Publisher { get; set; }
         public int Year { get; set; }
