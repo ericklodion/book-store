@@ -23,7 +23,7 @@ namespace bs_domain
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=cb-pelotense.postgres.database.azure.com;Database=book_store;Username=cb_pelotense_admin;Password=sAoI24rM2m2k");
+            optionsBuilder.UseNpgsql("");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

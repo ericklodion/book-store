@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>bs_api</RootNamespace>
+    <UserSecretsId>2caf7d8b-3afa-4ed8-b47d-cd67ba980b6e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
