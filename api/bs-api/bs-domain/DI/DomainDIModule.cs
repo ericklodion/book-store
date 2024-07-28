@@ -18,6 +18,7 @@ namespace bs_domain.DI
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<BookReporitory>();
+            services.AddScoped<SubjectReporitory>();
 
             return services;
         }

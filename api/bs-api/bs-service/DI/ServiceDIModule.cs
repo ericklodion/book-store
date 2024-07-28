@@ -1,4 +1,5 @@
 ﻿
+using bs_service;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,9 @@ namespace bs_domain.DI
         public static IServiceCollection AddServiceModule(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAppDbContext(configuration);
+
+            services.AddScoped<BookService>();
+            services.AddScoped<SubjectService>();
 
             return services;
         }

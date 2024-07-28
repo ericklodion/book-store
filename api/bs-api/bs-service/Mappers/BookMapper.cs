@@ -25,7 +25,7 @@ namespace bs_service.Mappers
         {
             return new Book
             {
-                Code = book.Code,
+                Code = book.Code ?? 0,
                 Title = book.Title,
                 Publisher = book.Publisher,
                 Year = book.Year
