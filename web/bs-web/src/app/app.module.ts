@@ -8,6 +8,9 @@ import { SubjectComponent } from './pages/subject/subject.component';
 import { AuthorComponent } from './pages/author/author.component';
 import { PricetableComponent } from './pages/pricetable/pricetable.component';
 import { BooksComponent } from './pages/books/books.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { BooksComponent } from './pages/books/books.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule.forRoot(),
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
