@@ -2,6 +2,7 @@
 using bs_domain.Repositories;
 using bs_service.DTO;
 using bs_service.Mappers;
+using bs_shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,10 @@ namespace bs_service
 
         public async Task<PriceTableDTO> Update(PriceTableDTO dto)
         {
+            var notExists = (await _repository.GetById(dto.Code.Value) is null);
+            if (notExists)
+                throw new NotFoundException($"Tabela de preço com código {dto.Code.Value} não encontrada.");
+
             var priceTable = PriceTableMapper.FromDTO(dto);
             priceTable = await _repository.Update(priceTable);
 
@@ -44,6 +49,9 @@ namespace bs_service
         public async Task Delete(long code)
         {
             var priceTable = await _repository.GetById(code);
+            if (priceTable is null)
+                throw new NotFoundException($"Tabela de preço com código {code} não encontrada.");
+
             await _repository.Delete(priceTable);
         }
     }

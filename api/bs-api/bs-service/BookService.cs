@@ -3,6 +3,7 @@ using bs_domain.Entities;
 using bs_domain.Repositories;
 using bs_service.DTO;
 using bs_service.Mappers;
+using bs_shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,6 +75,10 @@ namespace bs_service
 
         public async Task<BookDTO> Update(BookDTO dto)
         {
+            var notExists = (await _repository.GetById(dto.Code.Value) is null);
+            if (notExists)
+                throw new NotFoundException($"Livro com código {dto.Code.Value} não encontrado.");
+
             var book = BookMapper.FromDTO(dto);
             book = await _repository.Update(book);
 
@@ -83,12 +88,17 @@ namespace bs_service
         public async Task Delete(long code)
         {
             var book = await _repository.GetById(code);
+            if (book is null)
+                throw new NotFoundException($"Livro com código {code} não encontrado.");
+
             await _repository.Delete(book);
         }
 
         public async Task<Book> GetById(long code)
         {
             var book = await _repository.GetByIdWithRelations(code);
+            if (book is null)
+                throw new NotFoundException($"Livro com código {code} não encontrado.");
 
             return book;
         }

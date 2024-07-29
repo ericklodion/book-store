@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\bs-service\bs-service.csproj" />
+    <ProjectReference Include="..\bs-shared\bs-shared.csproj" />
   </ItemGroup>
 
 </Project>
