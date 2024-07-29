@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bs_domain.Repositories
+namespace bs_data.Repositories
 {
     public class BaseRepository<T> where T : class
     {

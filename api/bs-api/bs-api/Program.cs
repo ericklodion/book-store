@@ -1,4 +1,4 @@
-using bs_domain.DI;
+using bs_data.DI;
 using bs_shared.Middlewares;
 using System.Text.Json.Serialization;
 

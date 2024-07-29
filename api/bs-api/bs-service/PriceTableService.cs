@@ -1,5 +1,5 @@
-﻿using bs_domain.Entities;
-using bs_domain.Repositories;
+﻿using bs_data.Entities;
+using bs_data.Repositories;
 using bs_service.DTO;
 using bs_service.Mappers;
 using bs_shared.Exceptions;

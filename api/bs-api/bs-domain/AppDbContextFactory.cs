@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-namespace bs_domain
+namespace bs_data
 {
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bs_domain.Entities
+namespace bs_data.Entities
 {
     public class Author
     {

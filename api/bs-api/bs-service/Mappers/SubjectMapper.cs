@@ -1,4 +1,4 @@
-﻿using bs_domain.Entities;
+﻿using bs_data.Entities;
 using bs_service.DTO;
 using System;
 using System.Collections.Generic;

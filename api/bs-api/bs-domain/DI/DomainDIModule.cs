@@ -1,4 +1,4 @@
-﻿using bs_domain.Repositories;
+﻿using bs_data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bs_domain.DI
+namespace bs_data.DI
 {
     public static class DomainDIModule
     {

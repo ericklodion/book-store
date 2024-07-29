@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bs_domain.DI
+namespace bs_data.DI
 {
     public static class ServiceDIModule
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bs_domain
+namespace bs_data
 {
     public class UnitOfWork : IDisposable
     {

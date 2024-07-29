@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using bs_domain;
+using bs_data;
 
 #nullable disable
 
-namespace bs_domain.Migrations
+namespace bs_data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -21,7 +21,7 @@ namespace bs_domain.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("bs_domain.Entities.Author", b =>
+            modelBuilder.Entity("bs_data.Entities.Author", b =>
                 {
                     b.Property<long>("Code")
                         .ValueGeneratedOnAdd()
@@ -39,7 +39,7 @@ namespace bs_domain.Migrations
                     b.ToTable("Author");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.Book", b =>
+            modelBuilder.Entity("bs_data.Entities.Book", b =>
                 {
                     b.Property<long>("Code")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace bs_domain.Migrations
                     b.ToTable("Book");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.BookAuthor", b =>
+            modelBuilder.Entity("bs_data.Entities.BookAuthor", b =>
                 {
                     b.Property<long>("BookCode")
                         .HasColumnType("bigint");
@@ -84,7 +84,7 @@ namespace bs_domain.Migrations
                     b.ToTable("BookAuthor");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.BookPriceTable", b =>
+            modelBuilder.Entity("bs_data.Entities.BookPriceTable", b =>
                 {
                     b.Property<long>("BookCode")
                         .HasColumnType("bigint");
@@ -102,7 +102,7 @@ namespace bs_domain.Migrations
                     b.ToTable("BookPriceTable");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.BookSubject", b =>
+            modelBuilder.Entity("bs_data.Entities.BookSubject", b =>
                 {
                     b.Property<long>("BookCode")
                         .HasColumnType("bigint");
@@ -117,7 +117,7 @@ namespace bs_domain.Migrations
                     b.ToTable("BookSubject");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.PriceTable", b =>
+            modelBuilder.Entity("bs_data.Entities.PriceTable", b =>
                 {
                     b.Property<long>("Code")
                         .ValueGeneratedOnAdd()
@@ -135,7 +135,7 @@ namespace bs_domain.Migrations
                     b.ToTable("PriceTable");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.Subject", b =>
+            modelBuilder.Entity("bs_data.Entities.Subject", b =>
                 {
                     b.Property<long>("Code")
                         .ValueGeneratedOnAdd()
@@ -153,15 +153,15 @@ namespace bs_domain.Migrations
                     b.ToTable("Subject");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.BookAuthor", b =>
+            modelBuilder.Entity("bs_data.Entities.BookAuthor", b =>
                 {
-                    b.HasOne("bs_domain.Entities.Author", "Author")
+                    b.HasOne("bs_data.Entities.Author", "Author")
                         .WithMany("BookAuthors")
                         .HasForeignKey("AuthorCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("bs_domain.Entities.Book", "Book")
+                    b.HasOne("bs_data.Entities.Book", "Book")
                         .WithMany("BookAuthors")
                         .HasForeignKey("BookCode")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -172,15 +172,15 @@ namespace bs_domain.Migrations
                     b.Navigation("Book");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.BookPriceTable", b =>
+            modelBuilder.Entity("bs_data.Entities.BookPriceTable", b =>
                 {
-                    b.HasOne("bs_domain.Entities.Book", "Book")
+                    b.HasOne("bs_data.Entities.Book", "Book")
                         .WithMany("BookPriceTables")
                         .HasForeignKey("BookCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("bs_domain.Entities.PriceTable", "PriceTable")
+                    b.HasOne("bs_data.Entities.PriceTable", "PriceTable")
                         .WithMany("BookPriceTables")
                         .HasForeignKey("PriceTableCode")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -191,15 +191,15 @@ namespace bs_domain.Migrations
                     b.Navigation("PriceTable");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.BookSubject", b =>
+            modelBuilder.Entity("bs_data.Entities.BookSubject", b =>
                 {
-                    b.HasOne("bs_domain.Entities.Book", "Book")
+                    b.HasOne("bs_data.Entities.Book", "Book")
                         .WithMany("BookSubjects")
                         .HasForeignKey("BookCode")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("bs_domain.Entities.Subject", "Subject")
+                    b.HasOne("bs_data.Entities.Subject", "Subject")
                         .WithMany("BookSubjects")
                         .HasForeignKey("SubjectCode")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -210,12 +210,12 @@ namespace bs_domain.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.Author", b =>
+            modelBuilder.Entity("bs_data.Entities.Author", b =>
                 {
                     b.Navigation("BookAuthors");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.Book", b =>
+            modelBuilder.Entity("bs_data.Entities.Book", b =>
                 {
                     b.Navigation("BookAuthors");
 
@@ -224,12 +224,12 @@ namespace bs_domain.Migrations
                     b.Navigation("BookSubjects");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.PriceTable", b =>
+            modelBuilder.Entity("bs_data.Entities.PriceTable", b =>
                 {
                     b.Navigation("BookPriceTables");
                 });
 
-            modelBuilder.Entity("bs_domain.Entities.Subject", b =>
+            modelBuilder.Entity("bs_data.Entities.Subject", b =>
                 {
                     b.Navigation("BookSubjects");
                 });

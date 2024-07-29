@@ -1,4 +1,4 @@
-﻿using bs_domain.Entities;
+﻿using bs_data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

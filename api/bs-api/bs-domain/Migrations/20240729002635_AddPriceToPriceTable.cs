@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace bs_domain.Migrations
+namespace bs_data.Migrations
 {
     public partial class AddPriceToPriceTable : Migration
     {

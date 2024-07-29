@@ -1,4 +1,4 @@
-﻿using bs_domain.Entities;
+﻿using bs_data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace bs_domain
+namespace bs_data
 {
     public class AppDbContext : DbContext
     {
