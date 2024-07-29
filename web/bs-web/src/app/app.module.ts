@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastComponent } from './components/toast/toast.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LoaderComponent } from './components/loader/loader.component';
     AppRoutingModule,
     ModalModule.forRoot(),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

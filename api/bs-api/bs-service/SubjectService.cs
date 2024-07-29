@@ -23,7 +23,7 @@ namespace bs_service
         public async Task<IEnumerable<SubjectDTO>> GetAll()
         {
             var subjects = await _repository.GetAll();
-            return subjects.Select(x => SubjectMapper.FromEntity(x));
+            return subjects.Select(x => SubjectMapper.FromEntity(x)).OrderBy(x => x.Description);
         }
 
         public async Task<SubjectDTO> Create(SubjectDTO dto)

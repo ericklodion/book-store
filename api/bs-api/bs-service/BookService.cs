@@ -28,7 +28,7 @@ namespace bs_service
         public async Task<IEnumerable<BookDTO>> GetAll()
         {
             var books = await _repository.GetAll();
-            return books.Select(x => BookMapper.FromEntity(x));
+            return books.Select(x => BookMapper.FromEntity(x)).OrderBy(x => x.Title);
         }
 
         public async Task<BookDTO> Create(BookDTO dto)

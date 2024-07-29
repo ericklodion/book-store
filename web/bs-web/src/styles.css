@@ -17,3 +17,20 @@
 .w-50{
     width: 50%;
 }
+
+.icon-action{
+    cursor: pointer;
+    color: #0d6efd;
+}
+
+.t-a-r{
+    text-align: right;
+}
+
+.t-a-l{
+    text-align: left;
+}
+
+.t-a-c{
+    text-align: center;
+}

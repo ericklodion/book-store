@@ -23,7 +23,7 @@ namespace bs_service
         public async Task<IEnumerable<PriceTableDTO>> GetAll()
         {
             var priceTables = await _repository.GetAll();
-            return priceTables.Select(x => PriceTableMapper.FromEntity(x));
+            return priceTables.Select(x => PriceTableMapper.FromEntity(x)).OrderBy(x => x.Description);
         }
 
         public async Task<PriceTableDTO> Create(PriceTableDTO dto)

@@ -14,6 +14,7 @@ export class AuthorComponent implements OnInit {
 
   modalRef?: BsModalRef;
   name?: string;
+  code?: number;
 
   authorList: Author[];
 
@@ -43,15 +44,26 @@ export class AuthorComponent implements OnInit {
   save(){
     let author = new Author()
     author.name = this.name
+    author.code = this.code
 
     this.loaderService.show()
-    this.authorApiService.createAuthor(author).then((regiteredAuthor: Author)=>{
-      this.cleanForm()
-      this.loadAuthors()
-      this.modalRef.hide()
-      this.loaderService.hide()
-      this.toastService.showToast('Sucesso ao incluir autor.', 'success')
-    })
+    this.modalRef.hide()
+
+    if(this.code){
+      this.authorApiService.editAuthor(author).then((regiteredAuthor: Author)=>{
+        this.cleanForm()
+        this.loadAuthors()        
+        this.loaderService.hide()
+        this.toastService.showToast('Sucesso ao alterar autor.', 'success')
+      })
+    }else{
+      this.authorApiService.createAuthor(author).then((regiteredAuthor: Author)=>{
+        this.cleanForm()
+        this.loadAuthors()
+        this.loaderService.hide()
+        this.toastService.showToast('Sucesso ao incluir autor.', 'success')
+      })
+    }
   }
 
   canSave(){
@@ -62,6 +74,23 @@ export class AuthorComponent implements OnInit {
 
   cleanForm(){
     this.name = ''
+    this.code = null
   }
 
+  edit(author: Author, template: TemplateRef<any>){
+    this.name = author.name
+    this.code = author.code
+
+    this.modalRef = this.modalService.show(template)
+  }
+
+  delete(author: Author){
+    this.loaderService.show()
+    this.authorApiService.deleteAuthor(author.code).then(()=>{
+      this.cleanForm()
+      this.loadAuthors()
+      this.loaderService.hide()
+      this.toastService.showToast('Sucesso ao excluir autor.', 'success')
+    })
+  }
 }

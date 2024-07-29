@@ -18,4 +18,12 @@ export class AuthorApiServiceService {
     return this.http.post<Author>(`${environment.apiUrl}/api/author`, author).toPromise()
   }
 
+  editAuthor(author: Author): Promise<Author>{
+    return this.http.put<Author>(`${environment.apiUrl}/api/author`, author).toPromise()
+  }
+
+  deleteAuthor(code: number): Promise<any>{
+    return this.http.delete(`${environment.apiUrl}/api/author/${code}`).toPromise()
+  }
+
 }

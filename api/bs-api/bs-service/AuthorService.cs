@@ -23,7 +23,7 @@ namespace bs_service
         public async Task<IEnumerable<AuthorDTO>> GetAll()
         {
             var authors = await _repository.GetAll();
-            return authors.Select(x => AuthorMapper.FromEntity(x));
+            return authors.Select(x => AuthorMapper.FromEntity(x)).OrderBy(x=> x.Name);
         }
 
         public async Task<AuthorDTO> Create(AuthorDTO dto)
