@@ -13,3 +13,5 @@
 /api/bs-api/.vs/ProjectEvaluation
 /api/bs-api/bs-shared/obj
 /api/bs-api/bs-shared/bin/Debug/net6.0
+/api/bs-api/bs-data/bin/Debug/net6.0
+/api/bs-api/bs-data/obj
