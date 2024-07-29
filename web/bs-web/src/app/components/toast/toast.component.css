@@ -1,0 +1,7 @@
+.toast-container {
+    z-index: 1055;
+}
+
+.toast-body{
+    color: white;
+}

@@ -2,6 +2,8 @@ import { Component, inject, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Author from 'src/app/models/Author';
 import { AuthorApiServiceService } from 'src/app/services/author-api-service.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-author',
@@ -17,7 +19,9 @@ export class AuthorComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService, 
-    private authorApiService: AuthorApiServiceService
+    private authorApiService: AuthorApiServiceService,
+    private toastService: ToastService,
+    private loaderService: LoaderService
   ) {}
 
   openModal(template: TemplateRef<any>) {
@@ -29,8 +33,10 @@ export class AuthorComponent implements OnInit {
   }
 
   loadAuthors(){
+    this.loaderService.show()
     this.authorApiService.getAuthors().then((authors: Author[])=>{
       this.authorList = authors;
+      this.loaderService.hide()
     })
   }
 
@@ -38,10 +44,13 @@ export class AuthorComponent implements OnInit {
     let author = new Author()
     author.name = this.name
 
+    this.loaderService.show()
     this.authorApiService.createAuthor(author).then((regiteredAuthor: Author)=>{
       this.cleanForm()
       this.loadAuthors()
       this.modalRef.hide()
+      this.loaderService.hide()
+      this.toastService.showToast('Sucesso ao incluir autor.', 'success')
     })
   }
 

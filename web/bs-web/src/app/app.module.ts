@@ -11,6 +11,8 @@ import { BooksComponent } from './pages/books/books.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
+import { ToastComponent } from './components/toast/toast.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     SubjectComponent,
     AuthorComponent,
     PricetableComponent,
-    BooksComponent
+    BooksComponent,
+    ToastComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
