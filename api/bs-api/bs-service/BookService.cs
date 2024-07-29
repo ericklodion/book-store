@@ -85,5 +85,12 @@ namespace bs_service
             var book = await _repository.GetById(code);
             await _repository.Delete(book);
         }
+
+        public async Task<Book> GetById(long code)
+        {
+            var book = await _repository.GetByIdWithRelations(code);
+
+            return book;
+        }
     }
 }

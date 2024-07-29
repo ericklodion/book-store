@@ -14,6 +14,12 @@ namespace bs_api.Controllers
             _service = service;
         }
 
+        [HttpGet("{code}")]
+        public async Task<IActionResult> Get([FromRoute] long code)
+        {
+            return Ok(await _service.GetById(code));
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {

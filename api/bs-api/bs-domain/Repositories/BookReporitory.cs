@@ -14,7 +14,22 @@ namespace bs_domain.Repositories
 
         public async Task<Book> GetById(long code)
         {
-            return await GetBaseQuery().Where(x=> x.Code == code).FirstOrDefaultAsync();
+            return await GetBaseQuery()
+                .Where(x=> x.Code == code)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Book> GetByIdWithRelations(long code)
+        {
+            return await GetBaseQuery()
+                .Include(x=> x.BookAuthors)
+                    .ThenInclude(x=> x.Author)
+                .Include(x => x.BookPriceTables)
+                    .ThenInclude(x => x.PriceTable)
+                .Include(x => x.BookSubjects)
+                    .ThenInclude(x => x.Subject)
+                .Where(x => x.Code == code)
+                .FirstOrDefaultAsync();
         }
     }
 }
