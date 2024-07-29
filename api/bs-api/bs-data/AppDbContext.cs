@@ -1,10 +1,6 @@
 ﻿using bs_data.Entities;
+using bs_data.Views;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace bs_data
 {
@@ -25,6 +21,12 @@ namespace bs_data
             modelBuilder.Entity<BookAuthor>().HasKey(ba => new { ba.BookCode, ba.AuthorCode });
             modelBuilder.Entity<BookSubject>().HasKey(ba => new { ba.BookCode, ba.SubjectCode });
             modelBuilder.Entity<BookPriceTable>().HasKey(ba => new { ba.BookCode, ba.PriceTableCode });
+
+            modelBuilder.Entity<BookView>(entity =>
+            {
+                entity.HasNoKey();
+                entity.ToView("BookView");
+            });
 
             base.OnModelCreating(modelBuilder);
         }

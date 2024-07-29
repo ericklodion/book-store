@@ -21,6 +21,7 @@ namespace bs_data.DI
             services.AddScoped<SubjectReporitory>();
             services.AddScoped<AuthorReporitory>();
             services.AddScoped<PriceTableReporitory>();
+            services.AddScoped<BookViewRepository>();
 
             services.AddScoped<UnitOfWork>();
 

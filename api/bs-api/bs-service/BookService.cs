@@ -9,16 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace bs_service
 {
     public class BookService
     {
         private readonly BookReporitory _repository;
+        private readonly BookViewRepository _bookViewRepository;
         private readonly UnitOfWork _unitOfWork;
-        public BookService(BookReporitory repository, UnitOfWork unitOfWork)
+        public BookService(BookReporitory repository, BookViewRepository bookViewRepository, UnitOfWork unitOfWork)
         {
             _repository = repository;
+            _bookViewRepository = bookViewRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -94,13 +97,19 @@ namespace bs_service
             await _repository.Delete(book);
         }
 
-        public async Task<Book> GetById(long code)
+        public async Task<BookDTO> GetById(long code)
         {
             var book = await _repository.GetByIdWithRelations(code);
             if (book is null)
                 throw new NotFoundException($"Livro com código {code} não encontrado.");
 
-            return book;
+            return BookMapper.FromEntity(book);
+        }
+
+        public async Task<IEnumerable<BookViewDTO>> GetReport()
+        {
+            var bookView = await _bookViewRepository.GetAll();
+            return bookView.Select(x => BookViewMapper.FromEntity(x));
         }
     }
 }
