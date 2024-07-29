@@ -106,10 +106,10 @@ namespace bs_service
             return BookMapper.FromEntity(book);
         }
 
-        public async Task<IEnumerable<BookViewDTO>> GetReport()
+        public async Task<IEnumerable<IEnumerable<BookViewDTO>>> GetReport()
         {
             var bookView = await _bookViewRepository.GetAll();
-            return bookView.Select(x => BookViewMapper.FromEntity(x));
+            return bookView.Select(x => BookViewMapper.FromEntity(x)).GroupBy(x=> x.AuthorCode);
         }
     }
 }
