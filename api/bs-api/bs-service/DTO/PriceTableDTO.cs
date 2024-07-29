@@ -11,5 +11,6 @@ namespace bs_service.DTO
     {
         public long? Code { get; set; } = null;
         public string Description { get; set; }
+        public decimal? Price { get; set; }
     }
 }

@@ -22,6 +22,8 @@ namespace bs_domain.DI
             services.AddScoped<AuthorReporitory>();
             services.AddScoped<PriceTableReporitory>();
 
+            services.AddScoped<UnitOfWork>();
+
             return services;
         }
     }

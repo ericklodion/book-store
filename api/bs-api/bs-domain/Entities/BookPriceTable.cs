@@ -11,7 +11,7 @@ namespace bs_domain.Entities
     {
         public long BookCode { get; set; }
         public long PriceTableCode { get; set; }
-
+        public decimal Price { get; set; }
 
         [ForeignKey("BookCode")]
         public Book Book { get; set; }

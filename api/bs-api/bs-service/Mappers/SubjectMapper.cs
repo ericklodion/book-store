@@ -24,7 +24,7 @@ namespace bs_service.Mappers
             return new Subject
             {
                 Code = subject.Code ?? 0,
-                Description=subject.Description,
+                Description =subject.Description,
             };
         }
     }

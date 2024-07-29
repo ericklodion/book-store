@@ -12,6 +12,11 @@ namespace bs_service.DTO
         public long? Code { get; set; } = null;
         public string Title { get; set; }
         public string Publisher { get; set; }
+        public int Edition { get; set; }
         public int Year { get; set; }
+
+        public IEnumerable<long> Subjects { get; set; }
+        public IEnumerable<long> Authors { get; set; }
+        public IEnumerable<BookPriceTableDTO> PriceTables { get; set; }
     }
 }

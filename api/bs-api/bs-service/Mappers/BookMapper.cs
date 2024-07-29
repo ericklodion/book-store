@@ -17,7 +17,8 @@ namespace bs_service.Mappers
                 Code = book.Code,
                 Title = book.Title,
                 Publisher = book.Publisher,
-                Year = book.Year
+                Year = book.Year,
+                Edition = book.Edition,
             };
         }
 
@@ -28,7 +29,8 @@ namespace bs_service.Mappers
                 Code = book.Code ?? 0,
                 Title = book.Title,
                 Publisher = book.Publisher,
-                Year = book.Year
+                Year = book.Year,
+                Edition = book.Edition,
             };
         }
     }

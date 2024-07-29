@@ -24,7 +24,7 @@ namespace bs_service.Mappers
             return new PriceTable
             {
                 Code = priceTable.Code ?? 0,
-                Description=priceTable.Description,
+                Description =priceTable.Description,
             };
         }
     }

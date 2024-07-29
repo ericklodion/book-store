@@ -29,8 +29,8 @@ namespace bs_domain.Entities
         [MaxLength(4)]
         public int Year { get; set; }
 
-        public ICollection<BookAuthor> BookAuthors { get; set; }
-        public ICollection<BookSubject> BookSubjects { get; set; }
-        public ICollection<BookPriceTable> BookPriceTables { get; set; }
+        public ICollection<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
+        public ICollection<BookSubject> BookSubjects { get; set; } = new List<BookSubject>();
+        public ICollection<BookPriceTable> BookPriceTables { get; set; } = new List<BookPriceTable>();
     }
 }
