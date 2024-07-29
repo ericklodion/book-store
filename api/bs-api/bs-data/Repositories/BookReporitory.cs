@@ -15,6 +15,7 @@ namespace bs_data.Repositories
         public async Task<Book> GetById(long code)
         {
             return await GetBaseQuery()
+                .AsNoTracking()
                 .Where(x=> x.Code == code)
                 .FirstOrDefaultAsync();
         }

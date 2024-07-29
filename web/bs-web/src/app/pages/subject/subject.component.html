@@ -1,3 +1,51 @@
-<p>
-  subject works!
-</p>
+
+<div class="row">
+  <div class="col-md-8">
+    <h2>Listagem de assuntos</h2>
+  </div>
+  <div class="col-md-4 text-end">
+    <button type="button" class="btn btn-primary" (click)="openModal(registerModalRef)">Cadastrar Assunto</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col mt-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th class="w-20 t-a-r">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subject of subjectList">
+          <td>{{subject.description}}</td>
+          <td class="t-a-r">
+            <mat-icon class="icon-action" (click)="edit(subject, registerModalRef)">drive_file_rename_outline</mat-icon>
+            <mat-icon class="icon-action" (click)="delete(subject, registerModalRef)">delete</mat-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ng-template #registerModalRef>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Cadastro de assuntos</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <label for="name" class="form-label">Descrição *</label>
+          <input type="text" class="form-control" [(ngModel)]="description" id="description" placeholder="Digite o nome do subject">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Fechar</button>
+    <button type="button" class="btn btn-primary" [disabled]="canSave()" (click)="save()">Salvar</button>
+  </div>
+</ng-template>
