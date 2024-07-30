@@ -19,6 +19,13 @@ namespace bs_service.Mappers
                 Publisher = book.Publisher,
                 Year = book.Year,
                 Edition = book.Edition,
+                Authors = book.BookAuthors.Select(x=> x.AuthorCode),
+                Subjects = book.BookSubjects.Select(x=> x.SubjectCode),
+                PriceTables = book.BookPriceTables.Select(x=> new BookPriceTableDTO
+                {
+                    Code= x.PriceTableCode,
+                    Price = x.Price
+                }),
             };
         }
 

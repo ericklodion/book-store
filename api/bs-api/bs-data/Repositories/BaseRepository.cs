@@ -47,5 +47,11 @@ namespace bs_data.Repositories
             _context.Set<T>().Remove(entity);
             _context.SaveChanges();
         }
+
+        public async Task DeleteRange(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
+            _context.SaveChanges();
+        }
     }
 }

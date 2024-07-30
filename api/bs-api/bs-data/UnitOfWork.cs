@@ -19,19 +19,19 @@ namespace bs_data
             _context.Database.BeginTransaction();
         }
 
-        public void CommitTransaction() 
+        public void CommitTransaction()
         {
             _context.Database.CommitTransaction();
         }
 
-        public void RollbackTransaction() 
+        public void RollbackTransaction()
         {
             _context.Database.RollbackTransaction();
         }
 
         public void Dispose()
         {
-            if(_context.Database.CurrentTransaction is not null)
+            if (_context.Database.CurrentTransaction is not null)
                 _context.Database.RollbackTransaction();
         }
     }

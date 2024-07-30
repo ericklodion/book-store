@@ -29,8 +29,28 @@ namespace bs_data.Repositories
                     .ThenInclude(x => x.PriceTable)
                 .Include(x => x.BookSubjects)
                     .ThenInclude(x => x.Subject)
+                //.AsNoTracking()
                 .Where(x => x.Code == code)
                 .FirstOrDefaultAsync();
+        }
+
+
+        public async Task BookAuthorDeleteRange(IEnumerable<BookAuthor> entities)
+        {
+            _context.Set<BookAuthor>().RemoveRange(entities);
+            _context.SaveChanges();
+        }
+
+        public async Task BookSubjectDeleteRange(IEnumerable<BookSubject> entities)
+        {
+            _context.Set<BookSubject>().RemoveRange(entities);
+            _context.SaveChanges();
+        }
+
+        public async Task BookPriceTableDeleteRange(IEnumerable<BookPriceTable> entities)
+        {
+            _context.Set<BookPriceTable>().RemoveRange(entities);
+            _context.SaveChanges();
         }
     }
 }

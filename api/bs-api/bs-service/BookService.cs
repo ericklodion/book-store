@@ -16,13 +16,15 @@ namespace bs_service
     public class BookService
     {
         private readonly BookReporitory _repository;
+        private readonly AuthorReporitory _authorRepository;
         private readonly BookViewRepository _bookViewRepository;
         private readonly UnitOfWork _unitOfWork;
-        public BookService(BookReporitory repository, BookViewRepository bookViewRepository, UnitOfWork unitOfWork)
+        public BookService(BookReporitory repository, BookViewRepository bookViewRepository, AuthorReporitory authorRepository, UnitOfWork unitOfWork)
         {
             _repository = repository;
             _bookViewRepository = bookViewRepository;
             _unitOfWork = unitOfWork;
+            _authorRepository = authorRepository;
         }
 
         public async Task<IEnumerable<BookDTO>> GetAll()
@@ -78,12 +80,48 @@ namespace bs_service
 
         public async Task<BookDTO> Update(BookDTO dto)
         {
-            var notExists = (await _repository.GetById(dto.Code.Value) is null);
-            if (notExists)
+            _unitOfWork.StartTransaction();
+
+            var book = await _repository.GetByIdWithRelations(dto.Code.Value);
+            if (book is null)
                 throw new NotFoundException($"Livro com código {dto.Code.Value} não encontrado.");
 
-            var book = BookMapper.FromDTO(dto);
-            book = await _repository.Update(book);
+            var bookDto = BookMapper.FromDTO(dto);
+
+            var missingAuthors = book.BookAuthors.Where(x => !dto.Authors.Any(y => y == x.AuthorCode));
+            var missingSubjects = book.BookSubjects.Where(x => !dto.Subjects.Any(y => y == x.SubjectCode));
+
+            var newAuthors = dto.Authors.Where(x => !book.BookAuthors.Any(y => y.AuthorCode == x));
+            var newSubjects= dto.Subjects.Where(x => !book.BookSubjects.Any(y => y.SubjectCode == x));
+
+            foreach (var newAuthor in newAuthors)
+                book.BookAuthors.Add(new BookAuthor { AuthorCode = newAuthor, BookCode = book.Code });
+            foreach (var newSubject in newSubjects)
+                book.BookSubjects.Add(new BookSubject { SubjectCode = newSubject, BookCode = book.Code });
+
+            await _repository.BookAuthorDeleteRange(missingAuthors);
+            await _repository.BookSubjectDeleteRange(missingSubjects);
+            await _repository.BookPriceTableDeleteRange(book.BookPriceTables);
+
+            foreach (var priceTableDTO in dto.PriceTables)
+            {
+                var priceTable = new BookPriceTable
+                {
+                    BookCode = book.Code,
+                    PriceTableCode = priceTableDTO.Code,
+                    Price = priceTableDTO.Price
+                };
+                book.BookPriceTables.Add(priceTable);
+            }
+
+            book.Title = bookDto.Title;
+            book.Year = bookDto.Year;
+            book.Edition = bookDto.Edition;
+            book.Publisher = bookDto.Publisher;
+
+            await _repository.Update(book);
+
+            _unitOfWork.CommitTransaction();
 
             return BookMapper.FromEntity(book);
         }

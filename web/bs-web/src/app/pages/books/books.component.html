@@ -1,3 +1,210 @@
-<p>
-  books works!
-</p>
+
+<div class="row">
+  <div class="col-md-8">
+    <h2>Listagem de livros</h2>
+  </div>
+  <div class="col-md-4 text-end">
+    <button type="button" class="btn btn-primary" (click)="print()">Imprimir</button>
+    <button type="button" class="btn btn-primary ml-10" (click)="create(registerModalRef)">Cadastrar Livro</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col mt-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="w-40">Título</th>
+          <th class="w-10">Ano</th>
+          <th class="w-10">Edição</th>
+          <th class="w-20">Editora</th>
+          <th class="w-20 t-a-r">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of booksList">
+          <td>{{book.title}}</td>
+          <td>{{book.year}}</td>
+          <td>{{book.edition}}</td>
+          <td>{{book.publisher}}</td>
+          <td class="t-a-r">
+            <mat-icon class="icon-action" (click)="edit(book, registerModalRef)">drive_file_rename_outline</mat-icon>
+            <mat-icon class="icon-action" (click)="delete(book, registerModalRef)">delete</mat-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<ng-template #registerModalRef>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Cadastro de livro</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="mb-3">
+          <label for="name" class="form-label">Título *</label>
+          <input type="text" class="form-control" [(ngModel)]="title" id="title" placeholder="Digite o título">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="name" class="form-label">Ano *</label>
+          <input type="number" class="form-control" [(ngModel)]="year" id="title" placeholder="Selecione o ano">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="mb-3">
+          <label for="name" class="form-label">Editora *</label>
+          <input type="text" class="form-control" [(ngModel)]="publisher" id="publisher" placeholder="Digite a editora">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="name" class="form-label">Edição *</label>
+          <input type="number" class="form-control" [(ngModel)]="edition" id="edition" placeholder="Selecione a edição">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <ul class="nav nav-tabs justify-content-center mb-3">
+            <li class="nav-item" (click)="tab = 0">
+              <p class="nav-link" [ngClass]="tab==0 ? 'active' : ''">Autores *</p>
+            </li>
+            <li class="nav-item" (click)="tab = 1">
+              <p class="nav-link" [ngClass]="tab==1 ? 'active' : ''">Assuntos *</p>
+            </li>
+            <li class="nav-item" (click)="tab = 2">
+              <p class="nav-link" [ngClass]="tab==2 ? 'active' : ''">Tabela de Preço *</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="row" *ngIf="tab==0">
+          <div class="col">
+            <div class="row mb-3">
+              <div class="col-md-9">
+                <label for="author" class="form-label">Autor *</label>
+                <select class="form-select" id="author" [(ngModel)]="authorSelectedOption" aria-label="Default select example">
+                  <option *ngFor="let author of authorsList" [value]="author.code">{{ author.name }}</option>
+                </select>
+              </div>
+              <div class="col-md-3 text-end d-flex flex-column">
+                <button type="button" class="btn btn-light mt-auto" (click)="addAuthor()">Adicionar</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th class="w-20 t-a-r">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let selectedAuthor of selectedAuthors">
+                      <td>{{selectedAuthor.name}}</td>
+                      <td class="t-a-r">
+                        <mat-icon class="icon-action" (click)="delAuthor(selectedAuthor)">delete</mat-icon>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="tab==1">
+          <div class="col">
+            <div class="row mb-3">
+              <div class="col-md-9">
+                <label for="subject" class="form-label">Assunto *</label>
+                <select class="form-select" id="subject" [(ngModel)]="subjectSelectedOption" aria-label="Default select example">
+                  <option *ngFor="let subject of subjectsList" [value]="subject.code">{{ subject.description }}</option>
+                </select>
+              </div>
+              <div class="col-md-3 text-end d-flex flex-column">
+                <button type="button" class="btn btn-light mt-auto" (click)="addSubject()">Adicionar</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th class="w-20 t-a-r">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let selectedSubject of selectedSubjects">
+                      <td>{{selectedSubject.description}}</td>
+                      <td class="t-a-r">
+                        <mat-icon class="icon-action" (click)="delSubject(selectedSubject)">delete</mat-icon>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="tab==2">
+          <div class="col">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="pricetable" class="form-label">Tabela *</label>
+                <select class="form-select" [(ngModel)]="priceTableSelectedOption" id="pricetable" aria-label="Default select example">
+                  <option *ngFor="let priceTable of priceTableList" [value]="priceTable.code">{{ priceTable.description }}</option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label for="name" class="form-label">Preço *</label>
+                <input type="number" class="form-control" [(ngModel)]="price" id="price" placeholder="Digite o preço">
+              </div>
+              <div class="col-md-3 text-end d-flex flex-column">
+                <button type="button" class="btn btn-light mt-auto" (click)="addPriceTable()">Adicionar</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th class="w-30 t-a-r">Preço</th>
+                      <th class="w-20 t-a-r">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let selectedPriceTable of selectedPriceTables">
+                      <td>{{selectedPriceTable.description}}</td>
+                      <td class="w-30 t-a-r">{{currency(selectedPriceTable.price)}}</td>
+                      <td class="w-20 t-a-r">
+                        <mat-icon class="icon-action" (click)="delPriceTable(selectedPriceTable)">delete</mat-icon>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Fechar</button>
+    <button type="button" class="btn btn-primary" (click)="save()">Salvar</button>
+  </div>
+</ng-template>

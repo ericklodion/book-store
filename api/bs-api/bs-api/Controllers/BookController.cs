@@ -33,7 +33,7 @@ namespace bs_api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] BookDTO dto)
+        public async Task<IActionResult> Put([FromBody]BookDTO dto)
         {
             return Ok(await _service.Update(dto));
         }
