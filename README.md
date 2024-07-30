@@ -1,7 +1,7 @@
 
-# Book Stores
+# Book Store
 
-Este projeto implementa de forma basica a relação entre autores, assuntos, tabelas de preço e livros de uma livraria. Tenha em vista que em um projeto real contaríamos com muitos outros dados, ferramentas, funcionalidades e técnicas de desenvolvimento.
+Este projeto implementa de forma basica a relação entre autores, assuntos, tabelas de preço e livros de uma livraria.
 
 
 ## Ferramentas e tecnologias utilizadas
