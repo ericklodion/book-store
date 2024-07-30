@@ -44,11 +44,5 @@ namespace bs_api.Controllers
             await _service.Delete(code);
             return Ok();
         }
-
-        [HttpGet("/report")]
-        public async Task<IActionResult> Report()
-        {
-            return Ok(await _service.GetReport());
-        }
     }
 }

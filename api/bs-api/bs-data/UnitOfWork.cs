@@ -31,8 +31,12 @@ namespace bs_data
 
         public void Dispose()
         {
-            if (_context.Database.CurrentTransaction is not null)
-                _context.Database.RollbackTransaction();
+            try
+            {
+                if (_context.Database.CurrentTransaction is not null)
+                    _context.Database.RollbackTransaction();
+            }
+            catch (ObjectDisposedException ex) { }
         }
     }
 }

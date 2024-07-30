@@ -1,41 +1,42 @@
 
-<div class="row">
-  <div class="col-md-8">
-    <h2>Listagem de livros</h2>
+<div *ngIf="!isPrinting">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Listagem de livros</h2>
+    </div>
+    <div class="col-md-4 text-end">
+      <button type="button" class="btn btn-primary" (click)="prepareDownload()">Imprimir</button>
+      <button type="button" class="btn btn-primary ml-10" (click)="create(registerModalRef)">Cadastrar Livro</button>
+    </div>
   </div>
-  <div class="col-md-4 text-end">
-    <button type="button" class="btn btn-primary" (click)="print()">Imprimir</button>
-    <button type="button" class="btn btn-primary ml-10" (click)="create(registerModalRef)">Cadastrar Livro</button>
+  <div class="row">
+    <div class="col mt-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="w-40">Título</th>
+            <th class="w-10">Ano</th>
+            <th class="w-10">Edição</th>
+            <th class="w-20">Editora</th>
+            <th class="w-20 t-a-r">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of booksList">
+            <td>{{book.title}}</td>
+            <td>{{book.year}}</td>
+            <td>{{book.edition}}</td>
+            <td>{{book.publisher}}</td>
+            <td class="t-a-r">
+              <mat-icon class="icon-action" (click)="edit(book, registerModalRef)">drive_file_rename_outline</mat-icon>
+              <mat-icon class="icon-action" (click)="delete(book, registerModalRef)">delete</mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="col mt-3">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th class="w-40">Título</th>
-          <th class="w-10">Ano</th>
-          <th class="w-10">Edição</th>
-          <th class="w-20">Editora</th>
-          <th class="w-20 t-a-r">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of booksList">
-          <td>{{book.title}}</td>
-          <td>{{book.year}}</td>
-          <td>{{book.edition}}</td>
-          <td>{{book.publisher}}</td>
-          <td class="t-a-r">
-            <mat-icon class="icon-action" (click)="edit(book, registerModalRef)">drive_file_rename_outline</mat-icon>
-            <mat-icon class="icon-action" (click)="delete(book, registerModalRef)">delete</mat-icon>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
 
 <ng-template #registerModalRef>
   <div class="modal-header">
@@ -208,3 +209,44 @@
     <button type="button" class="btn btn-primary" (click)="save()">Salvar</button>
   </div>
 </ng-template>
+
+<h3 *ngIf="isPrinting" class="mb-3">Preparando impressão ...</h3>
+<div id="printContainer" class="container">
+  <div *ngFor="let books of booksByAuthor" class="row">
+    <div class="col">
+      <h4>{{books[0].authorName}}</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Editora</th>
+            <th>Edição</th>
+            <th>Ano</th>
+            <th>Assunto</th>
+            <th>Tabelas de Preço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of getBooks(books)">
+            <td>{{ book[0].code }}</td>
+            <td>{{ book[0].title }}</td>
+            <td>{{ book[0].publisher }}</td>
+            <td>{{ book[0].edition }}</td>
+            <td>{{ book[0].year }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let subject of getSubjects(book)">{{subject}}</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li *ngFor="let price of getPrices(book)">{{price}}</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

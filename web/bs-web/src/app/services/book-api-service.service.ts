@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import Book from '../models/Book';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import BookView from '../models/BookView';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,10 @@ import { environment } from 'src/environments/environment';
 export class BookApiServiceService {
 
   constructor(private http: HttpClient) { }
+
+  getReport() : Promise<BookView[][]>{
+    return this.http.get<BookView[][]>(`${environment.apiUrl}/api/bookreport`).toPromise()
+  }
 
   getBooks() : Promise<Book[]>{
     return this.http.get<Book[]>(`${environment.apiUrl}/api/book`).toPromise()

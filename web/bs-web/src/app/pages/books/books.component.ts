@@ -1,8 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Author from 'src/app/models/Author';
 import Book from 'src/app/models/Book';
 import BookPriceTable from 'src/app/models/BookPriceTable';
+import BookView from 'src/app/models/BookView';
 import PriceTable from 'src/app/models/PriceTable';
 import Subject from 'src/app/models/Subject';
 import { AuthorApiServiceService } from 'src/app/services/author-api-service.service';
@@ -42,6 +45,9 @@ export class BooksComponent implements OnInit {
   booksList: Book[];
   subjectsList: Subject[];
   priceTableList: PriceTable[];
+
+  booksByAuthor: BookView[][] = []
+  isPrinting: boolean = false
 
   constructor(
     private modalService: BsModalService, 
@@ -152,14 +158,14 @@ export class BooksComponent implements OnInit {
         this.cleanForm()
         this.loadBooks()        
         this.loaderService.hide()
-        this.toastService.showToast('Sucesso ao alterar tabela de preço.', 'success')
+        this.toastService.showToast('Sucesso ao alterar livro.', 'success')
       })
     }else{
       this.bookApiService.createBook(book).then((regiteredBook: Book)=>{
         this.cleanForm()
         this.loadBooks()
         this.loaderService.hide()
-        this.toastService.showToast('Sucesso ao incluir tabela de preço.', 'success')
+        this.toastService.showToast('Sucesso ao incluir livro.', 'success')
       })
     }
   }
@@ -273,7 +279,63 @@ export class BooksComponent implements OnInit {
     return 'R$ ' + value.toFixed(2).replace('.', ',');
   }
 
-  print(){
-    
+  prepareDownload(){
+    this.loaderService.show()
+    this.isPrinting = true
+    this.bookApiService.getReport().then((booksByAuthor: BookView[][])=>{
+      this.booksByAuthor = booksByAuthor;
+      this.download()
+    })
+  }
+
+  download(){
+    setTimeout(() => {
+      const doc = new jsPDF();
+      const element = document.getElementById('printContainer');
+      
+      html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const imgProps = doc.getImageProperties(imgData);
+        const pdfWidth = doc.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        doc.save('books.pdf');
+
+        this.booksByAuthor = []
+        this.isPrinting = false
+        this.loaderService.hide()
+      });
+    }, 1000);
+  }
+
+  getSubjects(book: BookView[]){
+    var unique = book.map(x=> x.subjectDescription).filter((value, index, array) => array.indexOf(value) === index)
+    return unique
+  }
+
+  getPrices(book: BookView[]){
+    var unique = book.map(x=> `${x.priceTableDescription}: ${this.currency(x.price)}`).filter((value, index, array) => array.indexOf(value) === index)
+    return unique
+  }
+
+  getBooks(books: BookView[]){
+    let groupedData = this.groupBy(books, 'code');
+    return groupedData 
+  }
+
+  groupBy(arr, key) {
+    return Object.values(
+      arr.reduce((acc, item) => {
+        const groupKey = item[key];
+
+        if (!acc[groupKey]) {
+          acc[groupKey] = [];
+        }
+
+        acc[groupKey].push(item);
+        return acc;
+      }, {})
+    );
   }
 }

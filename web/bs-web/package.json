@@ -25,6 +25,8 @@
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "core-js": "^2.5.4",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "ngx-bootstrap": "^6.2.0",
     "rxjs": "6.0.0",
     "zone.js": "~0.8.26"
